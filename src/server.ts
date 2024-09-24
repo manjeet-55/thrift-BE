@@ -1,7 +1,7 @@
-import app from './app';
-import connectDB from './db';
+import app from "./app";
+import connectDB from "./db";
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 connectDB();
 app.listen(PORT, () => {
