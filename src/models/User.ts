@@ -28,9 +28,3 @@ const UserSchema: Schema = new Schema({
 });
 export const userModel = mongoose.model<IUser>("User", UserSchema);
 
-export const getUserByEmail = (email: string) => userModel.findOne({ email });
-export const createUser = async (values: Record<string, any>) => {
-  const userData = await new userModel(values).save();
-  console.log(userData);
-  return userData;
-};
