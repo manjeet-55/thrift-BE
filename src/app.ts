@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import router from "./router";
 import connectDB from "./db";
+import errorMiddleware from "./middleware/errorHandler";
 dotenv.config();
 
 const app: Application = express();
@@ -16,6 +17,8 @@ app.use(helmet());
 app.use(express.json());
 app.use(compression());
 
-app.use("/", router());
+app.use("/api", router());
+
+app.use(errorMiddleware);
 
 export default app;
