@@ -9,3 +9,11 @@ export const authentication = (salt: string, password: string) => {
     .update(SECRET)
     .digest("hex");
 };
+
+export const responseGenerator = (data: any, code: number, message: string) => {
+  return {
+    data,
+    code,
+    message,
+  };
+};
