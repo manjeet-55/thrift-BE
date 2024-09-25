@@ -4,9 +4,6 @@ import { userModel } from "../models/User";
 export const getUserByEmail = async (email: string) => {
   try {
     const user = await userModel.findOne({ email });
-    if (!user) {
-      throw new CustomError(`User not found`, 400);
-    }
     return user;
   } catch (error: any) {
     throw new CustomError(
