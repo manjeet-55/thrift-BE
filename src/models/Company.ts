@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Types } from "mongoose";
 
 interface IAddress {
   street: string;
@@ -47,6 +47,7 @@ export interface ICompany extends Document {
   coverImage: string;
   logo: string;
   socialLinks: ISocialLinks;
+  createdBy: Types.ObjectId;
 }
 
 const AddressSchema: Schema<IAddress> = new Schema({
@@ -80,7 +81,7 @@ const SocialLinksSchema: Schema<ISocialLinks> = new Schema({
 const CompanySchema: Schema<ICompany> = new Schema(
   {
     name: { type: String, required: true, unique: true },
-    website: { type: String, required: true },
+    website: { type: String, required: false },
     snapshot: { type: String, required: false },
     size: { type: String, required: false },
     specialisms: [{ type: String }],
@@ -96,6 +97,11 @@ const CompanySchema: Schema<ICompany> = new Schema(
     coverImage: { type: String, required: false },
     logo: { type: String, required: false },
     socialLinks: SocialLinksSchema,
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );

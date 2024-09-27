@@ -10,9 +10,7 @@ export const register = async (
   next: NextFunction
 ) => {
   try {
-    const { error, value } = registerSchemaValidation.validate(req.body, {
-      abortEarly: false,
-    });
+    const { error, value } = registerSchemaValidation.validate(req.body);
     if (error) {
       throw new CustomError(
         error.details.map((detail) => detail.message).join(", "),

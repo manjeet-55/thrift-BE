@@ -20,7 +20,7 @@ interface IJob extends Document {
   benefits?: string[];
   project: string;
   qualifications: string[];
-  company: mongoose.Schema.Types.ObjectId;
+  company: Schema.Types.ObjectId;
 }
 
 const JobSchema: Schema<IJob> = new Schema(
@@ -57,7 +57,7 @@ const JobSchema: Schema<IJob> = new Schema(
     project: { type: String },
     qualifications: [{ type: String }],
     company: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Company",
       required: true,
     },
