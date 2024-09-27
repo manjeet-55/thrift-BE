@@ -26,13 +26,13 @@ const ApplicationSchema: Schema<IApplication> = new Schema(
     },
     currentStatus: {
       type: Schema.Types.ObjectId,
-      ref: "Status",
+      ref: "HiringStepSchema.steps",
     },
     statusHistory: [
       {
         status: {
           type: Schema.Types.ObjectId,
-          ref: "Status",
+          ref: "HiringStepSchema.steps",
         },
         updatedAt: { type: Date, default: Date.now },
       },

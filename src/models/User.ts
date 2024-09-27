@@ -3,14 +3,23 @@ import mongoose, { Schema, Document } from "mongoose";
 enum UserRoles {
   ADMIN = "Admin",
   COMPANY = "Company",
-  CANDIDTAE = "Candidate",
+  CANDIDATE = "Candidate",
+}
+
+enum InvitationStatus {
+  PENDING = "Pending",
+  ACCEPTED = "Accepted",
+  REJECTED = "rejected",
 }
 interface IUser extends Document {
   email: string;
-  password: string;
+  password?: string;
   username: string;
   phone: string;
   role: UserRoles;
+  isInvited: boolean;
+  invitationToken?: string;
+  invitationStatus?: InvitationStatus;
 }
 
 const UserSchema: Schema = new Schema(
@@ -22,13 +31,13 @@ const UserSchema: Schema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Please add a password"],
     },
     username: {
       type: String,
       required: [true, "Please add a username"],
     },
     phone: {
+      type: String,
       required: [true, "Please add a phone number"],
     },
     role: {
@@ -36,9 +45,22 @@ const UserSchema: Schema = new Schema(
       enum: UserRoles,
       required: true,
     },
+    isInvited: {
+      type: Boolean,
+      default: false,
+    },
+    invitationToken: {
+      type: String,
+    },
+    invitationStatus: {
+      type: String,
+      enum: InvitationStatus,
+      default: "Pending",
+    },
   },
   {
     timestamps: true,
   }
 );
+
 export const userModel = mongoose.model<IUser>("User", UserSchema);
